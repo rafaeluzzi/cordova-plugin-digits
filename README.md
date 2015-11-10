@@ -35,8 +35,8 @@ otherwise the `authenticateFailed` is called instead.
 
 #### Example
 
-    window.plugins.cordovaDigits.authenticate((loginResponse) => {
-      const oAuthHeaders = JSON.parse(loginResponse);
+    window.plugins.cordovaDigits.authenticate((oAuthHeaders) => {
+      console.log(oAuthHeaders);
     }, (error) => {
       console.warn("[Digits]", "Login failed", error);
     });

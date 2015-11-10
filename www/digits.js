@@ -3,8 +3,10 @@ const exec = require('cordova/exec');
 function noop() {}
 
 const digits = {
-  authenticate: function authenticate(successCallback, failureCallback) {
-    exec(successCallback || noop, failureCallback || noop, 'Digits', 'authenticate', []);
+  authenticate: function authenticate(authenticateSuccess, authenticateFailed) {
+    exec(function success(result) {
+      (authenticateSuccess || noop)(JSON.parse(result));
+    }, authenticateFailed || noop, 'Digits', 'authenticate', []);
   },
 };
 
