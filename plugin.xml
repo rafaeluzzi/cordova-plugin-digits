@@ -93,7 +93,7 @@
     <framework src="Security.framework" weak="true" />
     <framework src="Social.framework" weak="true" />
 
-    <resource-file src="src/ios/DigitsKit.framework/Resources/DigitsKitResources.bundle" />
+    <resource-file src="src/ios/DigitsKit.framework/Versions/A/Resources/DigitsKitResources.bundle" />
   </platform>
 
 </plugin>
