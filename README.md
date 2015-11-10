@@ -26,21 +26,32 @@ It is also possible to install via repo url directly (unstable)
 Initiates the Digits native interface. If successful the `authenticateSuccess` is called,
 otherwise the `authenticateFailed` is called instead.
 
-    window.plugins.digits.authenticate(authenticateSuccess, authenticateFailed);
+    window.plugins.digits.authenticate(options, authenticateSuccess, authenticateFailed);
 
 #### Parameters
 
+ - **options**: Theming options for iOS.
  - **authenticateSuccess**: The callback that is passed the authenticated info.
  - **geolocationError**: (Optional) The callback that executes if authentication fails.
 
 #### Example
 
-    window.plugins.cordovaDigits.authenticate((oAuthHeaders) => {
-      console.log(oAuthHeaders);
-    }, (error) => {
-      console.warn("[Digits]", "Login failed", error);
-    });
+    // Currently only accentColor and backgroundColor is supported.
+    // Note: These have no effect on Android.
+    const options = {
+      accentColor: '#ff0000',
+      backgroundColor: '#ffffff',
+    };
 
-## Contributiors
+    window.plugins.cordovaDigits.authenticate(options,
+      (oAuthHeaders) => {
+        console.log(oAuthHeaders);
+      },
+      (error) => {
+        console.warn("[Digits]", "Login failed", error);
+      }
+    );
+
+## Contributors
 
 This plugin is based off the work of another plugin: [https://github.com/cosmith/cordova-digits](https://github.com/cosmith/cordova-digits).
