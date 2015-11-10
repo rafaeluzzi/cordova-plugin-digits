@@ -6,6 +6,19 @@
 
 @implementation CDVDigits
 
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+  unsigned rgbValue = 0;
+
+  NSScanner *scanner = [NSScanner scannerWithString:hexString];
+  [scanner setScanLocation:1];
+  [scanner scanHexInt:&rgbValue];
+
+  return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16) / 255.0
+                         green:((rgbValue & 0xFF00) >> 8) / 255.0
+                          blue:(rgbValue & 0xFF) / 255.0
+                         alpha:1.0];
+}
+
 - (void)pluginInitialize {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishLaunching:) name:UIApplicationDidFinishLaunchingNotification object:nil];
 }
@@ -14,12 +27,27 @@
   [Fabric with:@[[Digits class]]];
 }
 
-- (void)authenticate:(CDVInvokedUrlCommand*)command {
-  [[Digits sharedInstance] authenticateWithCompletion:^(DGTSession* session, NSError *error) {
+- (void)authenticate:(CDVInvokedUrlCommand *)command {
+  NSDictionary *options = [command argumentAtIndex:0];
+
+  Digits *digits = [Digits sharedInstance];
+
+  DGTAppearance *appearance;
+  DGTAuthenticationConfiguration *configuration;
+
+  appearance = [[DGTAppearance alloc] init];
+  configuration = [[DGTAuthenticationConfiguration alloc] initWithAccountFields:DGTAccountFieldsDefaultOptionMask];
+  configuration.appearance = appearance;
+
+  if ([options objectForKey:@"backgroundColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"backgroundColor"]]; }
+  if ([options objectForKey:@"accentColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"accentColor"]]; }
+
+  [[Digits sharedInstance] authenticateWithViewController:nil
+                                            configuration:configuration
+                                               completion:^(DGTSession *session, NSError *error) {
     CDVPluginResult* pluginResult = nil;
 
     if (session) {
-      Digits *digits = [Digits sharedInstance];
       DGTOAuthSigning *oauthSigning = [[DGTOAuthSigning alloc] initWithAuthConfig:digits.authConfig authSession:digits.session];
       NSDictionary *authHeaders = [oauthSigning OAuthEchoHeadersToVerifyCredentials];
 
