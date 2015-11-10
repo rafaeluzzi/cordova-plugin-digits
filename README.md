@@ -4,7 +4,7 @@ This plugin provides native mobile Digits.com integration for both Android and i
 
 ## Installation
 
-This requires cordova 3.0+ (current stable 1.0.0)
+This requires cordova 5.0+ (current stable 1.0.0)
 
     cordova plugin add cordova-plugin-digits --variable FABRIC_API_KEY=your_api_key --variable FABRIC_CONSUMER_KEY=your_consumer_key --variable FABRIC_CONSUMER_SECRET=your_consumer_secret
 
