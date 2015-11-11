@@ -43,7 +43,7 @@ otherwise the `authenticateFailed` is called instead.
       backgroundColor: '#ffffff',
     };
 
-    window.plugins.cordovaDigits.authenticate(options,
+    window.plugins.digits.authenticate(options,
       (oAuthHeaders) => {
         console.log(oAuthHeaders);
       },
