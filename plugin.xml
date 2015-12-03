@@ -18,7 +18,7 @@
   <preference name="FABRIC_CONSUMER_SECRET" />
 
   <engines>
-    <engine name="cordova" version=">=3.0.0"/>
+    <engine name="cordova" version=">=3.0.0" />
   </engines>
 
   <js-module src="www/digits.js" name="Digits">
@@ -42,6 +42,7 @@
     </config-file>
 
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <meta-data android:name="io.fabric.ApiKey" android:value="$FABRIC_API_KEY" />
       <meta-data android:name="io.fabric.ConsumerKey" android:value="$FABRIC_CONSUMER_KEY" />
       <meta-data android:name="io.fabric.ConsumerSecret" android:value="$FABRIC_CONSUMER_SECRET" />
     </config-file>
