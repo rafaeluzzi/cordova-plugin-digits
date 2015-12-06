@@ -35,6 +35,8 @@ public class CordovaDigits extends CordovaPlugin {
 
     if ("authenticate".equals(action)) {
       authenticate(callbackContext);
+    if ("logout".equals(action)) {
+      logout(callbackContext);
     } else {
       Log.w(TAG, "unknown action `" + action + "`");
       return false;
@@ -71,6 +73,10 @@ public class CordovaDigits extends CordovaPlugin {
     };
 
     Digits.getInstance().authenticate(callback, cordova.getActivity().getResources().getIdentifier("CustomDigitsTheme", "style", cordova.getActivity().getPackageName()));
+  }
+
+  public void logout(final CallbackContext callbackContext) {
+    Digits.getSessionManager().clearActiveSession();
   }
 
   private TwitterAuthConfig getTwitterConfig() {

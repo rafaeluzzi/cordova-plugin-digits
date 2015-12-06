@@ -68,4 +68,9 @@
   }];
 }
 
+- (void)logout:(CDVInvokedUrlCommand *)command {
+  Digits *digits = [Digits sharedInstance];
+  [digits logOut];
+}
+
 @end
