@@ -35,7 +35,7 @@ public class CordovaDigits extends CordovaPlugin {
 
     if ("authenticate".equals(action)) {
       authenticate(callbackContext);
-    if ("logout".equals(action)) {
+    } else if ("logout".equals(action)) {
       logout(callbackContext);
     } else {
       Log.w(TAG, "unknown action `" + action + "`");
