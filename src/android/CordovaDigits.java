@@ -29,9 +29,14 @@ public class CordovaDigits extends CordovaPlugin {
   private static final String META_DATA_SECRET = "io.fabric.ConsumerSecret";
   private static final String TAG = "CORDOVA PLUGIN DIGITS";
 
+  private AuthCallback authCallback;
+
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
     Log.i(TAG, "executing action " + action);
+
+    TwitterAuthConfig authConfig = getTwitterConfig();
+    Fabric.with(cordova.getActivity().getApplicationContext(), new TwitterCore(authConfig), new Digits());
 
     if ("authenticate".equals(action)) {
       authenticate(callbackContext);
@@ -46,10 +51,7 @@ public class CordovaDigits extends CordovaPlugin {
   }
 
   public void authenticate(final CallbackContext callbackContext) {
-    TwitterAuthConfig authConfig = getTwitterConfig();
-    Fabric.with(cordova.getActivity().getApplicationContext(), new TwitterCore(authConfig), new Digits());
-
-    AuthCallback callback = new AuthCallback() {
+    authCallback = new AuthCallback() {
       @Override
       public void success(DigitsSession session, String phoneNumber) {
         // Do something with the session and phone number
@@ -72,7 +74,7 @@ public class CordovaDigits extends CordovaPlugin {
       }
     };
 
-    Digits.getInstance().authenticate(callback, cordova.getActivity().getResources().getIdentifier("CustomDigitsTheme", "style", cordova.getActivity().getPackageName()));
+    Digits.authenticate(authCallback, cordova.getActivity().getResources().getIdentifier("CustomDigitsTheme", "style", cordova.getActivity().getPackageName()));
   }
 
   public void logout(final CallbackContext callbackContext) {
