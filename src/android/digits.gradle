@@ -2,9 +2,8 @@ buildscript {
   repositories {
     maven { url 'https://maven.fabric.io/public' }
   }
-
   dependencies {
-    classpath 'io.fabric.tools:gradle:1.21.1'
+    classpath 'io.fabric.tools:gradle:1.+'
   }
 }
 
@@ -13,11 +12,11 @@ repositories {
 }
 
 dependencies {
-  compile('com.digits.sdk.android:digits:1.9.2@aar') {
-    transitive = true;
+  compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+    transitive = true
   }
 
-  compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-    transitive = true;
+  compile('com.digits.sdk.android:digits:1.9.2@aar') {
+    transitive = true
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-digits",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Digits.com for Cordova (iOS and Android)",
   "cordova": {
     "id": "cordova-plugin-digits",
