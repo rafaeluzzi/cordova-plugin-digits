@@ -10,7 +10,7 @@ const digits = {
   },
 
   logout: function logout() {
-    exec(noop, noop, 'Digits', 'logout');
+    exec(noop, noop, 'Digits', 'logout', []);
   },
 };
 

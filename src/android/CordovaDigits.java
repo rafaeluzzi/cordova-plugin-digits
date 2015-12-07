@@ -2,6 +2,8 @@ package com.jimmymakesthings.plugins.digits;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
 
 import java.util.*;
 import android.app.Activity;
@@ -22,6 +24,7 @@ import com.twitter.sdk.android.core.TwitterCore;
 import io.fabric.sdk.android.Fabric;
 
 import com.digits.sdk.android.*;
+import com.crashlytics.android.Crashlytics;
 
 public class CordovaDigits extends CordovaPlugin {
   volatile DigitsClient digitsClient;
@@ -32,11 +35,17 @@ public class CordovaDigits extends CordovaPlugin {
   private AuthCallback authCallback;
 
   @Override
-  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-    Log.i(TAG, "executing action " + action);
+  public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+    super.initialize(cordova, webView);
 
     TwitterAuthConfig authConfig = getTwitterConfig();
-    Fabric.with(cordova.getActivity().getApplicationContext(), new TwitterCore(authConfig), new Digits());
+    Fabric.with(cordova.getActivity().getApplicationContext(), new Crashlytics(), new TwitterCore(authConfig), new Digits());
+    Crashlytics.setBool("are_crashes_enabled", true);
+  }
+
+  @Override
+  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    Log.i(TAG, "executing action " + action);
 
     if ("authenticate".equals(action)) {
       authenticate(callbackContext);
