@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin
-  id="cordova-plugin-digits" version="1.0.8"
+  id="cordova-plugin-digits" version="1.0.9"
   xmlns="http://cordova.apache.org/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -77,6 +77,17 @@
             </dict>
             <key>KitName</key>
             <string>Digits</string>
+          </dict>
+          <dict>
+            <key>KitInfo</key>
+            <dict>
+              <key>consumerKey</key>
+              <string>$FABRIC_CONSUMER_KEY</string>
+              <key>consumerSecret</key>
+              <string>$FABRIC_CONSUMER_SECRET</string>
+            </dict>
+            <key>KitName</key>
+            <string>Crashlytics</string>
           </dict>
         </array>
       </dict>

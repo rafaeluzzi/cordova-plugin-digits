@@ -1,6 +1,7 @@
 #import "CDVDigits.h"
 
 #import <Cordova/CDV.h>
+#import <Crashlytics/Crashlytics.h>
 #import <DigitsKit/DigitsKit.h>
 #import <Fabric/Fabric.h>
 
@@ -24,7 +25,7 @@
 }
 
 - (void)finishLaunching:(NSNotification *)notification {
-  [Fabric with:@[[Digits class]]];
+  [Fabric with:@[[Crashlytics class], [Digits class]]];
 }
 
 - (void)authenticate:(CDVInvokedUrlCommand *)command {
