@@ -82,6 +82,7 @@
       </dict>
     </config-file>
 
+    <framework src="src/ios/Crashlytics.framework" custom="true" />
     <framework src="src/ios/DigitsKit.framework" custom="true" />
     <framework src="src/ios/Fabric.framework" custom="true" />
     <framework src="src/ios/TwitterCore.framework" custom="true" />
