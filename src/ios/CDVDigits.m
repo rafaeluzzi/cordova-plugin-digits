@@ -42,6 +42,7 @@
 
   if ([options objectForKey:@"backgroundColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"backgroundColor"]]; }
   if ([options objectForKey:@"accentColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"accentColor"]]; }
+  if ([options objectForKey:@"phoneNumber"]) { configuration.phoneNumber = [options objectForKey:@"phoneNumber"]; }
 
   [[Digits sharedInstance] authenticateWithViewController:nil
                                             configuration:configuration

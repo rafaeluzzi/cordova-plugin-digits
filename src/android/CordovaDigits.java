@@ -47,7 +47,7 @@ public class CordovaDigits extends CordovaPlugin {
     Log.i(TAG, "executing action " + action);
 
     if ("authenticate".equals(action)) {
-      authenticate(callbackContext);
+      authenticate(callbackContext, args);
     } else if ("logout".equals(action)) {
       logout(callbackContext);
     } else {
@@ -58,7 +58,7 @@ public class CordovaDigits extends CordovaPlugin {
     return true;
   }
 
-  public void authenticate(final CallbackContext callbackContext) {
+  public void authenticate(final CallbackContext callbackContext, JSONArray args) throws JSONException {
     authCallback = new AuthCallback() {
       @Override
       public void success(DigitsSession session, String phoneNumber) {
@@ -82,7 +82,17 @@ public class CordovaDigits extends CordovaPlugin {
       }
     };
 
-    Digits.authenticate(authCallback, cordova.getActivity().getResources().getIdentifier("CustomDigitsTheme", "style", cordova.getActivity().getPackageName()));
+    DigitsAuthConfig.Builder digitsAuthConfigBuilder = new DigitsAuthConfig.Builder()
+           .withAuthCallBack(authCallback)
+           .withThemeResId(cordova.getActivity().getResources().getIdentifier("CustomDigitsTheme", "style", cordova.getActivity().getPackageName()));
+
+    if (!args.isNull(0)) {
+        if (args.optJSONObject(0).has("phoneNumber")) {
+            digitsAuthConfigBuilder.withPhoneNumber(args.optJSONObject(0).getString("phoneNumber"));
+        }
+    }
+
+    Digits.authenticate(digitsAuthConfigBuilder.build());
   }
 
   public void logout(final CallbackContext callbackContext) {
