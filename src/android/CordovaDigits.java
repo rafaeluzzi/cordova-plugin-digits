@@ -40,6 +40,7 @@ public class CordovaDigits extends CordovaPlugin {
 
     TwitterAuthConfig authConfig = getTwitterConfig();
     Fabric.with(cordova.getActivity().getApplicationContext(), new Crashlytics(), new TwitterCore(authConfig), new Digits());
+    Digits.getInstance().getFabric().setCurrentActivity(cordova.getActivity());
   }
 
   @Override
