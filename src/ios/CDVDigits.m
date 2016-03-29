@@ -29,44 +29,46 @@
 }
 
 - (void)authenticate:(CDVInvokedUrlCommand *)command {
-  NSDictionary *options = [command argumentAtIndex:0];
+  [self.commandDelegate runInBackground:^{
+    NSDictionary *options = [command argumentAtIndex:0];
 
-  Digits *digits = [Digits sharedInstance];
+    Digits *digits = [Digits sharedInstance];
 
-  DGTAppearance *appearance;
-  DGTAuthenticationConfiguration *configuration;
+    DGTAppearance *appearance;
+    DGTAuthenticationConfiguration *configuration;
 
-  appearance = [[DGTAppearance alloc] init];
-  configuration = [[DGTAuthenticationConfiguration alloc] initWithAccountFields:DGTAccountFieldsDefaultOptionMask];
-  configuration.appearance = appearance;
+    appearance = [[DGTAppearance alloc] init];
+    configuration = [[DGTAuthenticationConfiguration alloc] initWithAccountFields:DGTAccountFieldsDefaultOptionMask];
+    configuration.appearance = appearance;
 
-  if ([options objectForKey:@"backgroundColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"backgroundColor"]]; }
-  if ([options objectForKey:@"accentColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"accentColor"]]; }
-  if ([options objectForKey:@"phoneNumber"]) { configuration.phoneNumber = [options objectForKey:@"phoneNumber"]; }
+    if ([options objectForKey:@"backgroundColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"backgroundColor"]]; }
+    if ([options objectForKey:@"accentColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"accentColor"]]; }
+    if ([options objectForKey:@"phoneNumber"]) { configuration.phoneNumber = [options objectForKey:@"phoneNumber"]; }
 
-  [[Digits sharedInstance] authenticateWithViewController:nil
-                                            configuration:configuration
-                                               completion:^(DGTSession *session, NSError *error) {
-    CDVPluginResult* pluginResult = nil;
+    [[Digits sharedInstance] authenticateWithViewController:nil
+                                              configuration:configuration
+                                                 completion:^(DGTSession *session, NSError *error) {
+      CDVPluginResult* pluginResult = nil;
 
-    if (session) {
-      DGTOAuthSigning *oauthSigning = [[DGTOAuthSigning alloc] initWithAuthConfig:digits.authConfig authSession:digits.session];
-      NSDictionary *authHeaders = [oauthSigning OAuthEchoHeadersToVerifyCredentials];
+      if (session) {
+        DGTOAuthSigning *oauthSigning = [[DGTOAuthSigning alloc] initWithAuthConfig:digits.authConfig authSession:digits.session];
+        NSDictionary *authHeaders = [oauthSigning OAuthEchoHeadersToVerifyCredentials];
 
-      NSError *error;
-      NSData *jsonData = [NSJSONSerialization dataWithJSONObject:authHeaders
-                                                         options:NSJSONWritingPrettyPrinted
-                                                           error:&error];
-      NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:authHeaders
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:&error];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
-      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                       messageAsString:jsonString];
-    } else {
-      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                       messageAsString:[error localizedDescription]];
-    }
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                         messageAsString:jsonString];
+      } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                         messageAsString:[error localizedDescription]];
+      }
 
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+      [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
   }];
 }
 
