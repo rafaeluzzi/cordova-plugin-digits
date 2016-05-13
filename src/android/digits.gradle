@@ -22,7 +22,7 @@ dependencies {
     transitive = true
   }
 
-  compile('com.digits.sdk.android:digits:1.9.2@aar') {
+  compile('com.digits.sdk.android:digits:1.10.3@aar') {
     transitive = true
   }
 }
