@@ -1,4 +1,4 @@
-gpackage com.jimmymakesthings.plugins.digits;
+package com.jimmymakesthings.plugins.digits;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -38,7 +38,7 @@ public class CordovaDigits extends CordovaPlugin {
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
 
-    TwitterAuthConfig authConfig = getTwitgterConfig();
+    TwitterAuthConfig authConfig = getTwitterConfig();
     Fabric.with(cordova.getActivity().getApplicationContext(), new Crashlytics(), new TwitterCore(authConfig), new Digits());
     Digits.getInstance().getFabric().setCurrentActivity(cordova.getActivity());
   }
