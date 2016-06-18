@@ -127,7 +127,7 @@
 "FOOTNOTE_2_STEP_VERIFICATION_CODE" = "You have previously set a 2-step verification code on <a href=\"https://www.digits.com/settings\">digits.com</a>";
 
 /* Message to show developers to configure their Digits app */
-"ONBOARDING_MESSAGE" = "[Digits] Log into https://fabric.io to set your App's name which will be included in verification emails and SMS/voice authorization messages.";
+"ONBOARDING_MESSAGE" = "Log into https://fabric.io to set your App's name which will be included in verification emails and SMS/voice authorization messages.";
 
 /* Message to show developers to configure their Answers logging */
-"ONBOARDING_MESSAGE_ANSWERS" = "[Digits] Add the Answers framework to your app to enable Digits event logging automatically. Learn more at https://answers.io";
+"ONBOARDING_MESSAGE_ANSWERS" = "Add the Answers framework to your app to enable Digits event logging automatically. Learn more at https://answers.io";

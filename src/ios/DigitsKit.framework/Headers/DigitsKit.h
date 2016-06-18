@@ -5,14 +5,15 @@
 //  Copyright (c) 2015 Twitter Inc. All rights reserved.
 //
 
-
+#if __has_feature(modules)
+@import AddressBook;
+@import Foundation;
+@import UIKit;
+@import TwitterCore;
+#else
 #import <AddressBook/AddressBook.h>
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
-
-#if __has_feature(modules)
-@import TwitterCore;
-#else
 #import <TwitterCore/TwitterCore.h>
 #endif
 
@@ -30,12 +31,15 @@
 #endif
 
 #import "DGTAPIClient.h"
+#import "DGTAuthEventDelegate.h"
+#import "DGTAuthEventDetails.h"
 #import "DGTAuthenticateButton.h"
 #import "DGTAuthenticationConfiguration.h"
 #import "DGTCompletionViewController.h"
 #import "DGTContactAccessAuthorizationStatus.h"
 #import "DGTContacts.h"
 #import "DGTContactsUploadResult.h"
+#import "DGTDebugConfiguration.h"
 #import "DGTUser.h"
 #import "DGTAppearance.h"
 #import "DGTErrors.h"

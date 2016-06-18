@@ -17,9 +17,11 @@
 #import <TwitterCore/TWTRAuthConfig.h>
 
 @class DGTAuthenticationConfiguration;
+@class DGTDebugConfiguration;
 @class TWTRAuthConfig;
 @class UIViewController;
 @protocol DGTSessionUpdateDelegate;
+@protocol DGTAuthEventDelegate;
 @protocol DGTCompletionViewController;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -78,6 +80,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<DGTSessionUpdateDelegate> sessionUpdateDelegate;
 
 /**
+ *  Be notified of various events taking place during the authentcation flow.  
+ */
+@property (nonatomic, weak) id<DGTAuthEventDelegate> authEventDelegate;
+
+/**
+ *  Configuration to override Digits behavior. e.g. provide a digits session stub that will be returned instead of completing the authentication flow.
+ */
+@property (nonatomic, strong, nullable) DGTDebugConfiguration *debugOverrides;
+
+/**
  *  Starts the authentication flow UI with the standard appearance. The UI is presented as a modal off of the top-most view controller. The modal title is the application name.
  *
  *  @param completion Block called after the authentication flow has ended.
@@ -100,7 +112,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param configuration            Options to configure the Digits experience
  *  @param completionViewController View controller pushed to the navigation controller when the auth flow is completed
  */
-- (void)authenticateWithNavigationViewController:(UINavigationController *)navigationController configuration:(DGTAuthenticationConfiguration *)configuration completionViewController:(UIViewController<DGTCompletionViewController> *)completionViewController __TVOS_UNAVAILABLE;
+- (void)authenticateWithNavigationViewController:(UINavigationController *)navigationController configuration:(DGTAuthenticationConfiguration *)configuration completionViewController:(id<DGTCompletionViewController>)completionViewController __TVOS_UNAVAILABLE;
 
 /**
  *  Deletes the local Digits user session from this app. This will not make a network request to invalidate the session. Subsequent calls to `authenticateWith` methods will start a new Digits authentication flow.
