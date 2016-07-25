@@ -39,7 +39,6 @@ function nonComments(obj) {
   return newObj;
 }
 
-
 // Starting here
 
 module.exports = function(context) {
@@ -83,10 +82,15 @@ module.exports = function(context) {
   // Adding or changing the parameters we need
   Object.keys(configurations).forEach(function(config) {
     buildSettings = configurations[config].buildSettings;
-    // buildSettings.LD_RUNPATH_SEARCH_PATHS = RUNPATH_SEARCH_PATHS_XCODE;
-    // buildSettings.IPHONEOS_DEPLOYMENT_TARGET = BUILD_VERSION_XCODE;
+    var linkerFlag = '"-lz"';
+    var existingFlags = buildSettings.OTHER_LDFLAGS;
+    if (!buildSettings.OTHER_LDFLAGS.includes(linkerFlag)) {
+      buildSettings.OTHER_LDFLAGS.push(linkerFlag);
+    }
     console.log('--- OTHER_LDFLAGS is:');
     console.dir(buildSettings.OTHER_LDFLAGS);
+    console.log('--- existingFlags is:');
+    console.dir(existingFlags);
   });
 
   // Writing the file again
@@ -96,10 +100,10 @@ module.exports = function(context) {
 
 
 function debug(msg) {
-  console.log('iosrtc-swift-support.js [INFO] ' + msg);
+  console.log('cordova-plugin-digits [INFO] ' + msg);
 }
 
 
 function debugerror(msg) {
-  console.error('iosrtc-swift-support.js [ERROR] ' + msg);
+  console.error('cordova-plugin-digits [ERROR] ' + msg);
 }
