@@ -39,6 +39,8 @@ function nonComments(obj) {
   return newObj;
 }
 
+// Array.includes() polyfill
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 if (!Array.prototype.includes) {
   Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
     var O = Object(this);
@@ -99,7 +101,7 @@ module.exports = function(context) {
   xcodeProject = xcode.project(xcodeProjectPath);
 
   // Showing info about the tasks to do
-  debug('fixing issues in the generated project files:');
+  debug('adding linker flag "-lz":');
 
   // Massaging the files
 
@@ -114,18 +116,14 @@ module.exports = function(context) {
     buildSettings = configurations[config].buildSettings;
     var linkerFlag = '"-lz"';
     var existingFlags = buildSettings.OTHER_LDFLAGS;
-    if (!buildSettings.OTHER_LDFLAGS.includes(linkerFlag)) {
-      buildSettings.OTHER_LDFLAGS.push(linkerFlag);
+    if (!existingFlags.includes(linkerFlag)) {
+      existingFlags.push(linkerFlag);
     }
-    console.log('--- OTHER_LDFLAGS is:');
-    console.dir(buildSettings.OTHER_LDFLAGS);
-    console.log('--- existingFlags is:');
-    console.dir(existingFlags);
   });
 
   // Writing the file again
-  // fs.writeFileSync(xcodeProjectPath, xcodeProject.writeSync(), 'utf-8');
-  // debug('file correctly fixed: ' + xcodeProjectPath);
+  fs.writeFileSync(xcodeProjectPath, xcodeProject.writeSync(), 'utf-8');
+  debug('file correctly fixed: ' + xcodeProjectPath);
 };
 
 
