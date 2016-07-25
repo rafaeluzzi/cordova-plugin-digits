@@ -52,6 +52,7 @@
   </platform>
 
   <platform name="ios">
+    <hook type="after_prepare" src="extra/hooks/xcode-project-patches.js" />
     <config-file target="config.xml" parent="/*">
       <feature name="Digits">
         <param name="ios-package" value="CDVDigits" />
