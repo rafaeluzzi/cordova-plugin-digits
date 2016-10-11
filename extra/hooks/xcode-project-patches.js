@@ -115,7 +115,10 @@ module.exports = function(context) {
   Object.keys(configurations).forEach(function(config) {
     buildSettings = configurations[config].buildSettings;
     var linkerFlag = '"-lz"';
-    var existingFlags = buildSettings.OTHER_LDFLAGS;
+    if (buildSettings.OTHER_LDFLAGS === undefined) {
+      buildSettings.OTHER_LDFLAGS = []
+    }
+    var existingFlags = (buildSettings.OTHER_LDFLAGS === undefined ? [] : buildSettings.OTHER_LDFLAGS);
     if (!existingFlags.includes(linkerFlag)) {
       existingFlags.push(linkerFlag);
     }
