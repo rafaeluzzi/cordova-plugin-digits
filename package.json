@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-digits",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Digits.com for Cordova (iOS and Android)",
   "cordova": {
     "id": "cordova-plugin-digits",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JimmyMakesThings/cordova-plugin-digits.git"
+    "url": "git+https://github.com/tnako/cordova-plugin-digits.git"
   },
   "keywords": [
     "cordova",
@@ -20,10 +20,10 @@
     "fabric.io",
     "fabric"
   ],
-  "author": "Edmond Leung (Jimmy Makes Things)",
+  "author": "Edmond Leung (Jimmy Makes Things) and Anton Korshikov (C.H.A.D.o)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JimmyMakesThings/cordova-plugin-digits/issues"
+    "url": "https://github.com/tnako/cordova-plugin-digits/issues"
   },
-  "homepage": "https://github.com/JimmyMakesThings/cordova-plugin-digits#readme"
+  "homepage": "https://github.com/tnako/cordova-plugin-digits#readme"
 }
