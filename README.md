@@ -4,13 +4,13 @@ This plugin provides native mobile Digits.com integration for both Android and i
 
 ## Installation
 
-This requires cordova 5.0+ (current stable 1.0.1)
+<!-- This requires cordova 5.0+ (current stable 1.0.1)
 
-    cordova plugin add cordova-plugin-digits --variable FABRIC_API_KEY=your_api_key --variable FABRIC_CONSUMER_KEY=your_consumer_key --variable FABRIC_CONSUMER_SECRET=your_consumer_secret
+    cordova plugin add cordova-plugin-digits --variable FABRIC_API_KEY=your_api_key --variable FABRIC_CONSUMER_KEY=your_consumer_key --variable FABRIC_CONSUMER_SECRET=your_consumer_secret -->
 
 It is also possible to install via repo url directly (unstable)
 
-    cordova plugin add https://github.com/JimmyMakesThings/cordova-plugin-digits --variable FABRIC_API_KEY=your_api_key --variable FABRIC_CONSUMER_KEY=your_consumer_key --variable FABRIC_CONSUMER_SECRET=your_consumer_secret
+    cordova plugin add https://github.com/tnako/cordova-plugin-digits --variable FABRIC_API_KEY=your_api_key --variable FABRIC_CONSUMER_KEY=your_consumer_key --variable FABRIC_CONSUMER_SECRET=your_consumer_secret
 
 ## Supported Platforms
 
@@ -32,7 +32,7 @@ otherwise the `authenticateFailed` is called instead.
 
  - **options**: Theming options for iOS.
  - **authenticateSuccess**: The callback that is passed the authenticated info.
- - **geolocationError**: (Optional) The callback that executes if authentication fails.
+ - **authenticateFailed**: (Optional) The callback that executes if authentication fails.
 
 #### Example
 
@@ -54,4 +54,4 @@ otherwise the `authenticateFailed` is called instead.
 
 ## Contributors
 
-This plugin is based off the work of another plugin: [https://github.com/cosmith/cordova-digits](https://github.com/cosmith/cordova-digits).
+This plugin is based off the work of another plugin: [https://github.com/guzzio/cordova-plugin-digits](https://github.com/guzzio/cordova-plugin-digits).
