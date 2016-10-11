@@ -90,6 +90,8 @@ public class CordovaDigits extends CordovaPlugin {
     if (!args.isNull(0)) {
         if (args.optJSONObject(0).has("phoneNumber")) {
             digitsAuthConfigBuilder.withPhoneNumber(args.optJSONObject(0).getString("phoneNumber"));
+        } else if (args.optJSONObject(0).has("sandbox") && args.optJSONObject(0).getBoolean("sandbox") == true) {
+            Digits.enableSandbox();
         }
     }
 

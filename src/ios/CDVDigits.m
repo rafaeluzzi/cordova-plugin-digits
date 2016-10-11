@@ -45,6 +45,11 @@
     if ([options objectForKey:@"accentColor"]) { appearance.accentColor = [CDVDigits colorFromHexString:[options objectForKey:@"accentColor"]]; }
     if ([options objectForKey:@"phoneNumber"]) { configuration.phoneNumber = [options objectForKey:@"phoneNumber"]; }
 
+    if ([[options objectForKey:@"sandbox"] boolValue] == YES) {
+      DGTSession *session = [DGTDebugConfiguration defaultDebugSession];
+      digits.debugOverrides = [[DGTDebugConfiguration alloc] initSuccessStateWithDigitsSession:session];
+    }
+
     [[Digits sharedInstance] authenticateWithViewController:nil
                                               configuration:configuration
                                                  completion:^(DGTSession *session, NSError *error) {

@@ -30,17 +30,19 @@ otherwise the `authenticateFailed` is called instead.
 
 #### Parameters
 
- - **options**: Theming options for iOS.
+ - **options**: Digits configure and theming options for iOS.
  - **authenticateSuccess**: The callback that is passed the authenticated info.
  - **authenticateFailed**: (Optional) The callback that executes if authentication fails.
 
 #### Example
 
-    // Currently only accentColor and backgroundColor is supported.
+    // Theme: Currently accentColor and backgroundColor is supported.
+    // sandbox - will return success result with dummy user’s auth token
     // Note: These have no effect on Android.
     const options = {
       accentColor: '#ff0000',
       backgroundColor: '#ffffff',
+      sandbox: true,
     };
 
     window.plugins.digits.authenticate(options,
