@@ -9,7 +9,7 @@
 @class DGTSession;
 
 /**
- *  Overrides for various Digits features
+ *  Overrides for Digits authentication features
  */
 
 @interface DGTDebugConfiguration : NSObject <NSCopying>
